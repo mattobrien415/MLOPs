@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "Chknbutt"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-pcatkpeq1n2w"
+s3_prefix = "Chknbutt"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["FaceSentimentFunctionChknbutt=681261969843.dkr.ecr.us-east-1.amazonaws.com/chknbutt2db7dcb2/facesentimentfunctionchknbutta9f1b120repo"]
+disable_rollback = true
+confirm_changeset = true

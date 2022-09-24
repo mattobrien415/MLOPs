@@ -1,0 +1,13 @@
+numpy
+mangum
+fastapi
+pydantic
+uvicorn
+python-multipart
+tensorflow
+opencv-python-headless
+scipy
+plotext
+pillow
+scipy
+imageio
