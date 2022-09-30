@@ -8,7 +8,7 @@ import io
 
 #We instantiate a deeplab model with the location of the pretrained models
 #https://github.com/tensorflow/models/tree/master/research/deeplab
-model_path = "/Users/mattobrien415/fourthbrain/code/MLOPs/assignments/week-3/frozen_inference_graph.pb"
+model_path = "frozen_inference_graph.pb"
 
 model = DeepLabModel(model_path)
 
