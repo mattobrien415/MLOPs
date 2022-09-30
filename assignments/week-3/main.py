@@ -39,7 +39,7 @@ async def bokeh(file: UploadFile = File(...), query: str = ''):
 #The root path will be used as the health check endpoint
 @app.get("/", tags=["Face Bokeh"])
 async def root():
-    return {"assignment 3": "week 3"}
+    return {"": ""}
 
 #Mangum is an adapter for running ASGI applications in AWS Lambda
 #https://github.com/jordaneremieff/mangum
