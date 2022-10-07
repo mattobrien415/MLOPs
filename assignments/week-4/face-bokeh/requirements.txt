@@ -3,7 +3,7 @@ fastapi
 pydantic
 uvicorn
 python-multipart
-tensorflow
+# tensorflow
 opencv-python-headless
 icrawler
 scipy
