@@ -3,19 +3,19 @@ services:
   main:
     build: .
     ports:
-      - '8000'
+      - '8000:8000'
   face-bokeh-container:
     build: ./face-bokeh
     depends_on:
       - main
     ports:
-      - '8001'
+      - '8001:8000'
   face-emotion:
     build: ./face-emotion
     depends_on:
       - main
     ports:
-      - '8002'
+      - '8002:8000'
 
 
 
