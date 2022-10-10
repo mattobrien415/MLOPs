@@ -1,33 +1,31 @@
 from fastapi import FastAPI, File, UploadFile
-import aiofiles
-
-import detect
-
-
+from fastapi.responses import Response
+from PIL import Image
+from detect import detect
+import cv2
+import numpy as np
+import io
 
 app = FastAPI()
-#The root path will be used as the health check endpoint
-#@app.get("/")
-#async def root():
-#    return {"health_check": "ok"}
 
-from fastapi.responses import FileResponse
+@app.post("/infer-and-return/")
+async def create_upload_file(uploaded_file: UploadFile = File(...)):
+    input_file_save_location = f"inference/input/{uploaded_file.filename}"
+    output_file_save_location = input_file_save_location.replace('/input/', '/output/')
+    with open(input_file_save_location, "wb+") as file_object:
+        file_object.write(uploaded_file.file.read())
+    print({"info": f"file '{uploaded_file.filename}' saved at '{input_file_save_location}'"})
+    
+    detect(input_file_save_location, output_file_save_location)
 
-some_file_path = "im.jpeg"
-app = FastAPI()
-
-
-@app.post("/")
-async def post_endpoint(in_file: UploadFile=File(...)):
-    # ...
-    async with aiofiles.open('inference/images/horses.jpg', 'wb') as out_file:
-        content = await in_file.read()  # async read
-        await out_file.write(content)  # async write
-
-    return {"Result": "OK"}
-
-@app.get("/")
-async def mainx():
-    print(type(detect.detect))
-    detect.detect()
-    return FileResponse('runs/detect/horses.jpg')
+    img1 = cv2.imread(input_file_save_location)
+    img2 = cv2.imread(output_file_save_location)
+    output_to_compare = Image.fromarray(cv2.hconcat([img1, img2]))
+    
+    # save image to an in-memory bytes buffer
+    with io.BytesIO() as buf:
+        output_to_compare.save(buf, format='PNG')
+        im_bytes = buf.getvalue()
+        
+    headers = {'Content-Disposition': 'inline; filename="test.png"'}
+    return Response(im_bytes, headers=headers, media_type='image/png')
