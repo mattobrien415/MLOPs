@@ -1,0 +1,26 @@
+
+#version: '3.9'
+services:
+  main:
+    build: .
+    ports:
+      - '8000:8000'
+  face-bokeh-container:
+    build: ./face-bokeh
+    depends_on:
+      - main
+    ports:
+      - '8001:8000'
+
+  face-emotion:
+    build: ./face-emotion
+    depends_on:
+      - main
+    ports:
+      - '8002:8000'
+
+  triten-container:
+    image: 
+      - nvcr.io/nvidia/tritonserver:22.06-py3
+    ports:
+      - '8003:8000'

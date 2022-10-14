@@ -6,7 +6,7 @@ import cv2
 import io
 
 # Set triton url path
-triton_url =
+triton_url = "triten-container:8000"
 
 # We instantiate a face-emotion detector with the location of the pretrained models.
 # In this case, the model needs to be set from our emotions.py
@@ -16,7 +16,7 @@ model = Sentiment()
 # Let's generate a new FastAPI app
 # Generate a FastAPI instance called `app` with the title 'Face-Emotion'
 # https://fastapi.tiangolo.com/
-app =
+app = FastAPI(title='big data big bucks')
 
 
 #The face-sentiment endpoint receives post requests with the image and returns the transformed image

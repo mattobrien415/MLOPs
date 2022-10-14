@@ -8,4 +8,13 @@ import requests
 
 
 #Call your get function for a health Check
-#to receive both (face-bokeh and face-emotion)
+#to receive both (face-bokeh and face-emotion
+
+
+
+app = FastAPI(title='Serverless Lambda FastAPI')
+
+@app.get("/", )
+async def root():
+    response = requests.get('http://face-bokeh-container:8000/')
+    return response)
