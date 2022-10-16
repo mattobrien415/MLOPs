@@ -2,17 +2,17 @@ import tritonhttpclient
 import numpy as np
 import cv2
 
-
+triton_url = "triten-container:8000"
 class Sentiment():
 
-    def __init__(self, face_model_path, triton_url='triton:8002'):
+    def __init__(self, face_model_path, triton_url=triton_url):
         """
         We instantiate the Sentiment class with the pretrained model paths
         Args:
             - face_model_path (str): path to the haar cascade opencv model
         """
-        self.input_name = 'conv2d_8_input'
-        self.output_name = 'dense_5'
+        self.input_name = 'conv2d_input'
+        self.output_name = 'dense_1'
         self.model_name = 'face-emotion'
         self.model_version = '1'
         self.triton_client = tritonhttpclient.InferenceServerClient(url=triton_url, verbose=False)

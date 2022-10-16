@@ -5,10 +5,10 @@ import tritonhttpclient
 from scipy.special import softmax
 from icrawler.builtin import GoogleImageCrawler
 
-
+triton_url = "triten-container:8000" 
 class DeepLabModel(object):
     """Class to load deeplab model and run inference."""
-    def __init__(self, # We set the triton url at port 8002):
+    def __init__(self, triton_url):
         self.input_name = 'ImageTensor'
         self.output_name = 'ResizeBilinear_3'
         self.model_name = 'face-bokeh'
