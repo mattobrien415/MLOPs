@@ -6,8 +6,9 @@
 
 
 
-# <h1 align="center" id="heading">Part 3 - Deploying a Face Segmentation Background Changer on AWS EC2 using FastAPI</h1>
+# <h1 align="center" id="heading">Week 3 - Deploying a Face Segmentation Background Changer on AWS EC2 using FastAPI</h1>
 
+## 🛍️ Overview
 
 Image segmentation has a lot of amazing applications that solve different computer vision problems. Image segmentation is, essentially, a classification task in which we classify each pixel as belonging to one of the target classes. So when you pass an image through a segmentation model, it will give one label to each of the pixels that present in the image. For this assignment, we'll be checking out background segmentation and replacement of those pixels. Background segmentation is a process in which an algorithm removes the static background from an image. This allows only changing a section of the image. This process is important for motion detection or object tracking.
 
@@ -15,99 +16,57 @@ In today's session, we'll be taking a look at face detection and background chan
 
 DeepLab is a state-of-art deep learning model for semantic image segmentation, where the goal is to assign semantic labels (e.g., person, dog, cat and so on) to every pixel in the input image. By using this image segmentation, we can separate the face in the foreground from the background. You can find the code in `deeplab.py`. We will then use a crawling Google image search to replace the original background with a background that matches our query.
 
-We are going to deploy a [pretrained image segmentation model](https://github.com/tensorflow/models/tree/master/research/deeplab).
+## Today's Breakdown
+- Part 1 - Introduction to AWS EC2
+- Part 2 - Introduction to FastAPI
+- Part 3 - Deploying a Face Segmentation Background Changer on AWS EC2 using FastAPI
 
-## Create EC2 Instance
+## 📚 Learning Objectives
 
-- Go to your EC2 console
-- Create an EC2 instance
-- Pick `Amazon Linux`
-- Pick instance type: At least `t3.medium` up to `t2.xlarge`
-- Create key-pair and download key (if you haven't already created one)
-- Edit network to enable the following...
-    - Enable public IPV4 address
-    - Open HTTP, HTTPS, SSH, and port 8000. All should be open from anywhere
-- Set drive size to 20GB
-- Launch Instance
+By the end of this session, you will be able to:
 
-## Install Dependencies
-- Get the IP address of the instance
-- Change key permissions
-- SSH into the machine
-- Install git if needed (`sudo apt install git` for Ubuntu based distros, `sudo yum install git` for Amazon Linux)
-- Install pip if needed (`sudo apt install python3-pip` for Ubuntu based distros, `sudo yum install python3-pip` for Amazon Linux)
-- Clone the repo (`git clone ...`)
-- If there's permission issues with gitlab, generate ssh keys (`ssh-keygen`) and add them to github account
-- CD into the folder (`cd cloned-repo`)
-- Install the requirements (`pip3 install -r requirements.txt`)
+- Configure and launch AWS EC2 instances
+- Write a FastAPI health check implementation
+- Write a functioning FastAPI app file for our application
+- Deploy a full FastAPI application to an AWS EC2 endpoint
+- Access and utilize a FastAPI application using Swagger UI
 
-## Run API
-- Run the API (`uvicorn app:app --host 0.0.0.0 --port 8000`)
-- Create a request with docs (http://ec2.ip.address:8000/docs)
+## 📦 Deliverables
+- Make the project public on your GitHub
+- Submit a `.zip` file of the following:
+  - Your `app.py` python file
+  - Image prediction of your deployed model with the query
 
-# Apple Silicone
+## 📝 Note
+Please note, this is a challenging assignment. You will likely not finish this assignment today and we expect that. We are here to help!
 
-## Run API locally
+## AWS EC2
+####  What is AWS EC2 (Elastic Compute Cloud)?
 
-Read this section if you are on an M1 chip ( arm64 / silicon; in theory it should work on M2 as well, yet to be tested ) and would like to launch the API locally. This part has been tested on an Apple M1 chip, macOS Monterey 12.6 machine.
+Among the vast array of services that Amazon offers, EC2 is the core compute component of the technology stack. In practice, EC2 makes life easier for developers by providing secure, and resizable compute capacity in the cloud. It greatly eases the process of scaling up or down, can be integrated into several other services, and comes with a plan where you only pay for how much you use it. You can find out more [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) and [here](https://intellipaat.com/blog/what-is-amazon-ec2-in-aws/)!
 
-## Install Tensorflow for M1
-Follow instructions step by step from [Metal: Getting Started with tensorflow-metal PluggableDevice](https://developer.apple.com/metal/tensorflow-plugin/), please read the NOTEs carefully and apply them accordingly.
+#### Choosing an AMI (Amazon Machine Image)
 
-After you install `miniforge3`, you can use it to create a new environment, say `tf-metal` and then install the `tensorflow-deps` to the environment.
+An AMI is a template that is used to create a new instance—or virtual machine—based on user requirements. The AMI will contain information about the software, operating system, volume, and access permissions. There are two types of AMIs:
 
-After following these three steps, make sure in your terminal to check if tensorflow is installed correctly by running
+- Predefined AMIs: Amazon creates these, and the user can modify them.
 
-```
-python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
-```
+- Custom AMIs: The user also creates these, and they can be reused. These AMIs are also available in the AMI Marketplace
 
-<details>
-<summary> Example Output
+#### Operating system
+EC2 instance supports several OSes such as Linux, Microsoft Windows Server, CentOS and Debian.
 
-    Metal device set to: Apple M1
+#### AWS EC2 vs S3
 
-    systemMemory: 8.00 GB
-    maxCacheSize: 2.67 GB
+Both Amazon EC2 and Amazon S3 are important services that allow developers to maximize use of the AWS cloud. The main difference between Amazon EC2 and S3 is that EC2 is a computing service that allows companies to run servers in the cloud. While S3 is an object storage service used to store and retrieve data from AWS through the Internet. S3 is like a giant hard drive in the cloud, while EC2 offers CPU and RAM in addition to storage. Many developers use both services for their cloud computing needs
 
-    2022-09-28 20:46:17.797673: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:306] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-    2022-09-28 20:46:17.797813: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:272] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -> physical PluggableDevice (device: 0, name: METAL, pci bus id: <undefined>)
-    tf.Tensor(-692.91614, shape=(), dtype=float32)
+## Resources
 
-</summary>
-</details>
+Want more? We've partnered up with [DeepLearning.ai](https://www.deeplearning.ai/) to bring to you a more advanced assignment utilizing docker. Please note, this assignment is optional and will not be graded.
+- [Deploy a ML model with fastAPI and Docker](https://github.com/https-deeplearning-ai/machine-learning-engineering-for-production-public/blob/main/course4/week2-ungraded-labs/C4_W2_Lab_1_FastAPI_Docker/README.md)
 
-If this is NOT successful ( symptoms: your python crashes ), please reach out to your instructors.
-
-## Install dependencies
-
-1. install the dependencies from `requirements-notf.txt`
-
-    ```
-    python -m pip install -r requirements-notf.txt
-    ```
-
-    You will not need `tensorflow` here, since it has been installed in the previous step.
-
-2. Troubleshooting:
-    Fire up a Python kernel from terminal and simply import the following packages as shown in `deeplab.py` to make sure they are installed correctly.
-
-    ```
-    import cv2
-    import tensorflow as tf
-    ```
-
-    a. Another difference you notice in `requirements-notf.txt` is that we are using `opencv-python` instead. This is to avoid a conflict in `numpy` versions: if you see an `ImportError: numpy.core.multiarray failed to import`, that's due to the conflict and installing the correct version of `opencv-python` should fix it.
-
-    b. Another possible error you might see is `AssertionError: Duplicate registrations for type 'experimentalOptimizer'`, not sure about the exact problem, yet uninstall `keras` shall solve it:
-
-        ```
-        python -m pip uninstall keras
-        ```
-5. Run the API locally
-
-    ```
-    uvicorn app:app --host 0.0.0.0 --port 8000
-    ```
-
-    Your API will be running at `http://localhost:8000/docs`
+[TensorFlow DeepLab 1](https://github.com/tensorflow/models/tree/master/research/deeplab)\
+[TensorFlow DeepLab 2](https://github.com/tensorflow/models/tree/master/research/deeplab2)\
+[DeepLab: Semantic Image Segmentation with
+Deep Convolutional Nets, Atrous Convolution,
+and Fully Connected CRFs](https://arxiv.org/pdf/1606.00915.pdf)\

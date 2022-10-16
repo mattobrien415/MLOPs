@@ -4,6 +4,8 @@ fastapi
 pydantic
 uvicorn
 python-multipart
-opencv-python
+tensorflow
+opencv-python-headless
 icrawler
 scipy
+#pymatting
