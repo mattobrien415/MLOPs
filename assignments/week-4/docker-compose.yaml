@@ -1,66 +1,31 @@
-version: '3.9'
-services:
-  main:
-    build: .
-    ports:
-      - '8000:8000'
-  face-bokeh-container:
-    build: ./face-bokeh
-    depends_on:
-      - main
-    ports:
-      - '8001:8000'
-  face-emotion:
-    build: ./face-emotion
-    depends_on:
-      - main
-    ports:
-      - '8002:8000'
-
-
-
+version: '3'
 #Direct the main healthcheck to port 8000
 #Direct the face-bokeh to port 8001
 #Direct the face-emotion to port 8002
+services:
+  face-bokeh-service:
+    build: ./face-bokeh
+    ports:
+      - 8001:8000
+    platform: linux/amd64
+
+    
+  face-emotion-service:
+    build: ./face-emotion
+    ports:
+      - 8002:8000
+    platform: linux/amd64
+
+  
+  main-service:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - face-bokeh-service
+      - face-emotion-service
+    platform: linux/amd64
 
 
-
-
-# each dir has a Dockerfile. Buld image, run container.
-# Those containers plural, then write a mian.py file, 
-# then build w/other Dockerfile in the 
-# "Dont worry about docker compose to run the other 2"
-
-# "look at the other Dockerfiles"
-
-# main. py is an 
-
-# one helatch check that uses requests to 
-# get the URL with port number for face-boke and emtioin
-
-# then reutrn that in json payload
-
-# need a GET in the requests
-
-
-#???
-# goodle docker container port
-# cheat sheets? 
-# 80001:8000
-# outside to inside
-
-# docker build .
-
-
-# you want 127.0.0.1:8000, and 80001
-
-
-# 8000:80 fron AWS to docker?
-
-# docker run from within a dockerfile, don't do that in the terminal! 
-# run c
-
-  #mainpy accesses the endpoint
-  #docker does port forwarding
-
-  # aws needs all those ports open
+  
+  

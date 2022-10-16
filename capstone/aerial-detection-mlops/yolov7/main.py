@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import Response
 from PIL import Image
-from detect import detect
+from detect_fast_api import detect
 import cv2
 import numpy as np
 import io
