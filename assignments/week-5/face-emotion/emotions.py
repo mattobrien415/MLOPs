@@ -2,10 +2,10 @@ import tritonhttpclient
 import numpy as np
 import cv2
 
-triton_url = "triten-container:8000"
+
 class Sentiment():
 
-    def __init__(self, face_model_path, triton_url=triton_url):
+    def __init__(self, face_model_path, triton_url='triton:8002'):
         """
         We instantiate the Sentiment class with the pretrained model paths
         Args:

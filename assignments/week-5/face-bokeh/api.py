@@ -6,17 +6,17 @@ import cv2
 import io
 
 # Set triton url path on port 8000
-triten_url = "triten-container:8000"
+triton_url = 'triton-container:8000'
 
 # We instantiate a deeplab model with the location of the pretrained models
 # or in this case, our triton server
 # https://github.com/tensorflow/models/tree/master/research/deeplab
-model = DeepLabModel(triten_url)
+model = DeepLabModel(triton_url)
 
 # Let's generate a new FastAPI app
 # Generate a FastAPI instance called `app` with the title 'Face-Bokeh'
 # https://fastapi.tiangolo.com/
-app = FastAPI(title='Serverless Lambda FastAPI')
+app = FastAPI(title='Face-Bokeh')
 
 
 #The face-bokeh endpoint receives post requests with the image and returns the transformed image
@@ -37,4 +37,4 @@ async def bokeh(file: UploadFile = File(...), query: str = ''):
 
 @app.get("/", tags=["Health Check"])
 async def root():
-    return {"message": "Ok"}
+    return {"face-bokeh": "Ok"}

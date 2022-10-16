@@ -1,22 +1,18 @@
 from starlette.responses import StreamingResponse
 from fastapi import FastAPI, File, UploadFile
 import requests
-from fastapi.encoders import jsonable_encoder
 
 # Let's generate a new FastAPI app
 # Generate a FastAPI instance called `app` with the title 'Triton Health Check'
 # https://fastapi.tiangolo.com/
+app = FastAPI(title='Triton Health Check')
+
 
 
 #Call your get function for a health Check
-#to receive both (face-bokeh and face-emotion
-
-
-
-app = FastAPI(title='Serverless Lambda FastAPI')
-
-@app.get("/", )
+#to receive both (face-bokeh and face-emotion)
+@app.get("/", tags=["Health Check"])
 async def root():
-    response_bokeh = requests.get('http://face-bokeh-container:8000/')
-    respose_emotion = requests.get('http://face-emotion:8000/')
-    return [response_bokeh, respose_emotion]
+    response_face_bokeh = requests.get("http://face-bokeh-service:8000/")
+    response_face_emotion = requests.get("http://face-emotion-service:8000/")
+    return [response_face_bokeh.content, response_face_emotion.content]

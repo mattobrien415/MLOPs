@@ -1,24 +1,35 @@
-
-version: '3.3'
+version: '3'
+#Direct the main healthcheck to port 8000
+#Direct the face-bokeh to port 8001
+#Direct the face-emotion to port 8002
 services:
-  main:
-    build: .
-    ports:
-      - '8003:8000'
-  face-bokeh-container:
+  face-bokeh-service:
     build: ./face-bokeh
     ports:
-      - '8001:8000'
+      - 8001:8000
+    platform: linux/amd64
 
-  face-emotion:
+    
+  face-emotion-service:
     build: ./face-emotion
     ports:
-      - '8002:8000'
+      - 8002:8000
+    platform: linux/amd64
 
-  triten-container:
-    image: 'nvcr.io/nvidia/tritonserver:22.06-py3'
+  
+  main-service:
+    build: .
     ports:
-      - '8000:8000'
-    env_file: .aws.env
-    command: ["tritonserver",  "--model-repository=s3://matt-week-05/models/"]
+      - 8000:8000
+    depends_on:
+      - face-bokeh-service
+      - face-emotion-service
+    platform: linux/amd64
 
+  triton-container:
+    env_file:
+      .aws.env
+    image: nvcr.io/nvidia/tritonserver:22.06-py3
+    command: ["tritonserver", "--model-repository=s3://deepak-mlops4-dev/week-5/models/"]
+    ports:
+      - 8003:8000

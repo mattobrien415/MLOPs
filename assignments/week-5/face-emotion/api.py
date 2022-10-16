@@ -6,17 +6,17 @@ import cv2
 import io
 
 # Set triton url path
-triton_url = "triten-container:8000"
+triton_url_path = "triton-container:8000"
 
 # We instantiate a face-emotion detector with the location of the pretrained models.
 # In this case, the model needs to be set from our emotions.py
 face_model_path = './haarcascade_frontalface_default.xml'
-model = Sentiment(face_model_path, triton_url)
+model = Sentiment(face_model_path, triton_url=triton_url_path)
 
 # Let's generate a new FastAPI app
 # Generate a FastAPI instance called `app` with the title 'Face-Emotion'
 # https://fastapi.tiangolo.com/
-app = FastAPI(title='big data big bucks')
+app = FastAPI(title='Face-Emotion')
 
 
 #The face-sentiment endpoint receives post requests with the image and returns the transformed image
@@ -37,4 +37,4 @@ async def sentiment(file: UploadFile = File(...)):
 
 @app.get("/", tags=["Health Check"])
 async def root():
-    return {"message": "Ok"}
+    return {"face-emotion": "Ok"}
