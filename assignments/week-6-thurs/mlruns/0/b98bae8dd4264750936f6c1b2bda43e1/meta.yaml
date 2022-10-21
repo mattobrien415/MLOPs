@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ec2-user/MLOPs/assignments/week-6-thurs/mlruns/0/b98bae8dd4264750936f6c1b2bda43e1/artifacts
+end_time: 1666315471905
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b98bae8dd4264750936f6c1b2bda43e1
+run_name: silent-yak-834
+run_uuid: b98bae8dd4264750936f6c1b2bda43e1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666315432870
+status: 4
+tags: []
+user_id: ec2-user

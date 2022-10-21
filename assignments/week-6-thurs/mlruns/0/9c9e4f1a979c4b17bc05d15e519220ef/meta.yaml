@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ec2-user/MLOPs/assignments/week-6-thurs/mlruns/0/9c9e4f1a979c4b17bc05d15e519220ef/artifacts
+end_time: 1666316720961
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9c9e4f1a979c4b17bc05d15e519220ef
+run_name: shivering-chimp-163
+run_uuid: 9c9e4f1a979c4b17bc05d15e519220ef
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666316650345
+status: 3
+tags: []
+user_id: ec2-user

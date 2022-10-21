@@ -25,5 +25,5 @@ services:
     command:
       [
         "tritonserver",
-        "--model-repository=s3://triton-repository/models/"
+        "--model-repository=s3://matt-week-05/models/"
       ]
